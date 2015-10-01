@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: .1em;
+        }
+        .parent {
+            margin-left: .8em;
+        }
+        .child {
+            margin-left: 1.6em;
+        }
+    </style>
+</head>
+<body>
+<div id="target" style="color: black">
+    Grandparent
+    <div style="color: black" class="parent demo">
+        -Parent
+        <div style="color: black" class="child demo">-First child</div>
+        <div style="color: black" class="child" id="target2">-Second child</div>
+    </div>
+</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute when the page is ready
+
+        // Will locate all direct children
+        // $('#target').children().attr('style', 'color: red');
+
+        // Will locate all descendants (use * to find everything)
+        // $('#target').find('.demo').attr('style', 'color: red');
+
+        // Find direct parent
+        // $('#target2').parent().attr('style', 'color: red');
+
+        // Find all parents
+        $('#target2').parents().attr('style', 'color: red');
+    });
+</script>
+</body>
+</html>

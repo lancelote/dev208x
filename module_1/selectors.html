@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello jQuery!</title>
+</head>
+<body>
+<h1>Hello, H1!</h1>
+<h1 class="demo">Hello, World!</h1>
+<h1 id="h1-id">Hello, everyone!</h1>
+<h1 data-custom="banner">Custom attribute</h1>
+<h1 class="col-md-5">Class starts with col</h1>
+<h1 class="col-xl-6">Class contains xl</h1>
+<header>
+    <h1>Inside Header</h1>
+</header>
+<header>
+    <div>
+        <h1>Inside Div inside Header</h1>
+    </div>
+</header>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute when the page is ready
+
+        // Update h1 text
+        $('#h1-id').text('Hello, jQuery');
+
+        // Find element based on attribute equality
+        $('[data-custom="banner"]').text('Found by equality');
+
+        // Find element based on attribute starts with
+        $('[class^="col"]').text('Found by starts with');
+
+        // Find element based on attribute contains
+        $('[class*="xl"]').text('Found by contains');
+
+        // Find element inside parent
+        $('header > h1').text('Parent - Child');
+
+        // Find element by sub-parent
+        $('header h1').text('Parent - ... - Child');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: .1em;
+        }
+        .parent {
+            margin-left: .8em;
+        }
+        .child {
+            margin-left: 1.6em;
+        }
+    </style>
+</head>
+<body>
+<div style="color: black" id="stop">First</div>
+<div style="color: black">Second</div>
+<div style="color: black">Third</div>
+<div style="color: black" id="target">Fourth (target)</div>
+<div style="color: black">Fifth</div>
+<div style="color: black">Sixth</div>
+<div style="color: black" id="end">Seventh</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute when the page is ready
+
+        // Update previous element
+        // $('#target').prev().attr('style', 'color: red');
+
+        // Update all previous elements
+        // $('#target').prevAll().attr('style', 'color: red');
+
+        // Update all previous elements until #stop
+        // $('#target').prevUntil('#stop').attr('style', 'color: red');
+
+        // Update next element
+        // $('#target').next().attr('style', 'color: red');
+
+        // Update next all
+        // $('#target').nextAll().attr('style', 'color: red');
+
+        // Update next all until #stop
+        $('#target').nextUntil('#end').attr('style', 'color: red');
+    });
+</script>
+</body>
+</html>
