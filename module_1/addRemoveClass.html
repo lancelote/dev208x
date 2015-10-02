@@ -4,16 +4,40 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
     </style>
 </head>
 <body>
+<div id="target">Demo Element</div>
+<div id="target0" class="blue test">Second Target</div>
 
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script>
     $(function () {
         // Will execute when the page is ready
 
+        // Add class red
+        // $('#target').addClass('red');
+
+        // Add class blue
+        // $('#target').addClass('blue');
+
+        // Remove class blue
+        // $('#target0').removeClass('blue');
+
+        // Remove multiple classes
+        $('#target0').removeClass('blue test');
     });
 </script>
 </body>
