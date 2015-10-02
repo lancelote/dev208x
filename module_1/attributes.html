@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+    </style>
+</head>
+<body>
+<div id="target">Demo Element</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute when the page is ready
+
+        // Color target element
+        var target = $('#target');
+        target.attr('style', 'color: red');
+
+        // Found element style
+        // var style = target.attr('style');
+        // alert(style);
+
+        // Remove style
+        target.removeAttr('style');
+    });
+</script>
+</body>
+</html>
