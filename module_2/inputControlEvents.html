@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        label {
+            display: inline-block;
+            width: 110px;
+        }
+        span.help {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name">
+            <span class="help" hidden="hidden">Please enter a name</span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email">
+            <span class="help" hidden="hidden">Please enter an email</span>
+        </div>
+    </form>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will fire on page ready
+
+        $('input[type="text"]').focus(function () {
+            $(this).next('span.help').removeAttr('hidden');
+        }).blur(function () {
+            $(this).next('span.help').attr('hidden', 'hidden');
+        });
+    });
+</script>
+</body>
+</html>
