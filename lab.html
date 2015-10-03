@@ -46,8 +46,7 @@
 
         var chose = function() {
             circles.removeClass('rating-hover rating-chosen');
-            clicked.addClass('rating-chosen');
-            clicked.prevAll().addClass('rating-chosen');
+            clicked.prevAll().andSelf().addClass('rating-chosen');
         };
 
         circles.click(function () {
@@ -58,8 +57,7 @@
         circles.hover(function () {
             var hovered = $(this);
             circles.removeClass('rating-chosen');
-            hovered.addClass('rating-hover');
-            hovered.prevAll().addClass('rating-hover');
+            hovered.prevAll().andSelf().addClass('rating-hover');
         });
 
         circles.mouseout(function () {
