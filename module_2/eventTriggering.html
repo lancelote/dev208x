@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+        .btn {
+            font-size: 1em;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<div><button type="button" class="btn updater">First</button></div>
+<div><button type="button" class="btn updater">Second</button></div>
+<div><button type="button" class="btn" id="target">Execute event handlers!</button></div>
+<div id="display"></div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute after page is ready
+
+        var display = $('#display');
+        var buttonUpdaters = $('button.updater');
+
+        buttonUpdaters.click(function () {
+
+            var existingText = display.text();
+            var buttonText = $(this).text();
+            display.text(existingText + ' - ' + buttonText);
+        });
+
+        $('#target').click(function () {
+            // Perform buttons click event
+            // buttonUpdaters.click();
+
+            // Just execute event handlers
+            // buttonUpdaters.trigger('click');
+
+            // Just execute first element event handler
+            buttonUpdaters.triggerHandler('click');
+        });
+    });
+</script>
+</body>
+</html>
