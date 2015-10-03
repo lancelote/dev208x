@@ -3,8 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+    </style>
 </head>
 <body>
+<div id="target">Demo Element</div>
+<div id="display">Another Demo</div>
 
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will start after page is ready
+
+        // This is a click event handler for the div element
+        // $('#target').click(function () {
+            // $('#display').text('Div was clicked');
+        // });
+
+        // Click event for every div
+        $('div').click(function () {
+            $(this).attr('style', 'color: red');
+        });
+    });
+</script>
 </body>
 </html>
