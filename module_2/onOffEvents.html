@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        .btn {
+            font-size: 1em;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <div><button type="button" class="btn validate">First button</button></div>
+    <div><button type="button" class="btn validate">Second button</button></div>
+    <div><button type="button" class="btn"> Third button</button></div>
+</form>
+<div id="display"></div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will start after page is ready
+
+        $('form').on('click', 'button.validate', function () {
+            $('#display').text($(this).text() + ' clicked!');
+        });
+    });
+</script>
+</body>
+</html>
