@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+        .btn {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <div><button type="button" class="btn" id="target">Execute!</button></div>
+</form>
+
+<div id="display"></div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute on page ready
+
+        var display = $('#display');
+
+        // Old code
+        // $('#target').click(function () {
+        //     display.text(display.text() + 'Clicked! ');
+        // });
+
+        // Execute once
+         $('#target').one('click', function () {
+             display.text(display.text() + 'Clicked! ');
+         });
+    });
+</script>
+</body>
+</html>
