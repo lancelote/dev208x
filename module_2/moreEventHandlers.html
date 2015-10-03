@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+    </style>
+</head>
+<body>
+<div id="target">Demo Element</div>
+<div id="display"></div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute on page ready
+
+        $('#target').click(function (event) {
+            var output = 'User clicked on ' + event.pageX + '/' + event.pageY;
+            $('#display').text(output);
+        });
+    });
+</script>
+</body>
+</html>
