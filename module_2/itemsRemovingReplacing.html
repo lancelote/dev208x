@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+        .btn {
+            font-size: 1em;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2>replace</h2>
+<div><button type="button" class="btn" id="executor">Execute!</button></div>
+<div id="target">Old content</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute after page is ready
+
+        $('#executor').click(function () {
+            $('#target').replaceWith('<div class="red">New content</div>');
+        });
+    });
+</script>
+</body>
+</html>
