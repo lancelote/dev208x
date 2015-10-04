@@ -41,28 +41,28 @@
 <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
 <script>
     $(function() {
-        var circles = $('.rating-circle');
-        var clicked;
+        var $circles = $('.rating-circle');
+        var $clicked;
 
         var chose = function() {
-            circles.removeClass('rating-hover rating-chosen');
-            clicked.prevAll().andSelf().addClass('rating-chosen');
+            $circles.removeClass('rating-hover rating-chosen');
+            $clicked.prevAll().andSelf().addClass('rating-chosen');
         };
 
-        circles.click(function () {
-            clicked = $(this);
+        $circles.click(function () {
+            $clicked = $(this);
             chose();
         });
 
-        circles.hover(function () {
+        $circles.mouseenter(function () {
             var hovered = $(this);
-            circles.removeClass('rating-chosen');
+            $circles.removeClass('rating-chosen');
             hovered.prevAll().andSelf().addClass('rating-hover');
         });
 
-        circles.mouseout(function () {
-            circles.removeClass('rating-hover');
-            if (clicked) {
+        $circles.mouseout(function () {
+            $circles.removeClass('rating-hover');
+            if ($clicked) {
                 chose();
             }
         });
