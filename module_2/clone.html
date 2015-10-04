@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+        .btn {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<h2>clone</h2>
+<div><button type="button" class="btn" id="executor">Execute!</button></div>
+<div id="dialog">First line</div>
+<div id="container"></div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute after page is ready
+
+        var $dialog = $('#dialog').clone();
+        $dialog.removeAttr('id');
+
+        $('#executor').click(function () {
+            $('#container').append($dialog.clone());
+        });
+    });
+</script>
+</body>
+</html>
