@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
         body {
-            font-family: Verdana, sans-serif;
+            font-family: Verdana;
         }
         h1, h2, h3 {
             color: darkblue;
@@ -17,9 +17,11 @@
             margin: 0;
             padding: .1em;
         }
+
         .rating-hover {
             background-color: yellow;
         }
+
         .rating-chosen {
             background-color: green;
         }
@@ -30,43 +32,64 @@
 <h2>Finding elements using jQuery</h2>
 <div>This session is about identifying elements using jQuery methods and selectors.</div>
 <h3>Rate this session</h3>
-<div id="rating-container">
-    <div class="rating-circle"></div>
-    <div class="rating-circle"></div>
-    <div class="rating-circle"></div>
-    <div class="rating-circle"></div>
-    <div class="rating-circle"></div>
+<div id="rating-container" max-value="5"></div>
+
+<div>
+    <label for="max-value">Enter max value:</label>
+    <input type="text" id="max-value" />
+    <button type="button" id="update-max-value">Update max value</button>
 </div>
 
 <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
 <script>
-    $(function() {
-        var $circles = $('.rating-circle');
-        var $clicked;
+    $(function () {
+        var $clicked;  // Clicked circle
+        var $container = $('#rating-container');
 
-        var chose = function() {
-            $circles.removeClass('rating-hover rating-chosen');
-            $clicked.prevAll().andSelf().addClass('rating-chosen');
-        };
+        updatePageStructure($container.attr('max-value'));  // Setup initial circles
 
-        $circles.click(function () {
-            $clicked = $(this);
-            chose();
+        // Circle adding machine
+        function updatePageStructure (circleNumber) {
+            while(circleNumber--) {
+                $container.append('<div class="rating-circle"></div>');
+            }
+        }
+
+        // Update number of circles according to user input
+        $('#update-max-value').on('click', function () {
+            // Remove all old circles
+            $container.html('');
+
+            // Add new circles
+            updatePageStructure($('#max-value').val());
         });
 
-        $circles.mouseenter(function () {
-            var hovered = $(this);
-            $circles.removeClass('rating-chosen');
-            hovered.prevAll().andSelf().addClass('rating-hover');
-        });
-
-        $circles.mouseout(function () {
-            $circles.removeClass('rating-hover');
+        $container.on('mouseenter', '.rating-circle', function () {
+            // Remove old rating
             if ($clicked) {
-                chose();
+                $clicked.prevAll().andSelf().removeClass('rating-chosen');
+            }
+
+            // Add yellow hover effect
+            $(this).prevAll().andSelf().addClass('rating-hover');
+        });
+
+        $container.on('mouseleave', '.rating-circle', function () {
+            // Remove yellow hover effect
+            $(this).prevAll().andSelf().removeClass('rating-hover');
+
+            // Restore user rating if any
+            if ($clicked) {
+                $clicked.prevAll().andSelf().addClass('rating-chosen');
             }
         });
-    });
+
+        // Save user rating and color circles to green
+        $container.on('click', '.rating-circle', function () {
+            $clicked = $(this);
+            $(this).prevAll().andSelf().addClass('rating-chosen');
+        });
+    })
 </script>
 </body>
 </html>
