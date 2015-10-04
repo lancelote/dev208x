@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+            width: 10em;
+        }
+        .btn {
+            font-size: 1em;
+            width: 100%;
+        }
+        #box {
+            padding-top: 1em;
+            height: 4em;
+            text-align: center;
+            background-color: darkblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h2>fade</h2>
+<div><button type="button" class="btn" id="executor">Execute!</button></div>
+<div id="box">Demo content</div>
+<div>Some text</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute after page is ready
+
+        $('#executor').click(function () {
+            $('#box').fadeToggle();
+        });
+    });
+</script>
+</body>
+</html>
