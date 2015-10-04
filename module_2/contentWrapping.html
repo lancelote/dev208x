@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+        .btn {
+            font-size: 1em;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h3>Wrapping</h3>
+<div><button type="button" class="btn" id="target">Execute!</button></div>
+<div class="wrap-me">First line</div>
+<div class="wrap-me">Second line</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute after page is ready
+
+        $('#target').click(function () {
+            // $('.wrap-me').wrap('<div class="red"></div>');
+            // $('.wrap-me').wrapAll('<div class="red"></div>');
+            $('.wrap-me').wrapInner('<div class="red"></div>');
+        });
+    });
+</script>
+</body>
+</html>
