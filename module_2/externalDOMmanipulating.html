@@ -31,8 +31,8 @@
         var display = $('#display');
 
         $('#target').click(function () {
-            display.prepend('<div>Start</div>');
-            display.append('<div>End</div>');
+            display.before('<div>Start</div>');
+            display.after('<div>End</div>');
         });
     });
 </script>
