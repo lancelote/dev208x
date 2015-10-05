@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 32px;
+        }
+        div {
+            margin-top: 0.1em;
+        }
+        .btn {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<div id="output">Click button to run script</div>
+<div>
+    <button class="btn" id="executor">Run script</button>
+</div>
+<div class="box">Sample content</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // Will execute after page is ready
+
+        $('#executor').click(function () {
+            $('.box').hide(1000).promise().done(function () {
+                // Will run after the hide is complete
+                $('#output').text('Box is now hidden');
+            });
+        });
+    });
+</script>
+</body>
+</html>
