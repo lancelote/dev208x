@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 26px;
+            font-family: Verdana, sans-serif;
+        }
+        div {
+            margin-bottom: 0.3em;
+        }
+        .btn {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <label for="message">Text:</label>
+    <input type="text" id="message" class="form-control">
+    <button type="button" class="btn" id="send-message" disabled="disabled">Send message</button>
+</div>
+<ul id="messages"></ul>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    // Load the worker
+    var worker = new Worker('js/worker.js');
+
+    // Register the message event handler
+    worker.addEventListener('message', function (e) {
+        // If worker is ready - send the message
+        if (e.data === 'READY') {
+            // Print the worker is ready
+            $('#messages').append('<li>Worker is ready</li>');
+
+            // Enable the button and add click event handler
+            $('#send-message').removeAttr('disabled').click(function () {
+                // Send the content of the text-box to the worker
+                worker.postMessage($('#message').val());
+            });
+
+            // Focus the text-box
+            $('#message').focus();
+        } else {
+            // If the answer is not READY - add it to output
+            $('#messages').append('<li>' + e.data + '</li>');
+
+            // Clear the text-box and reset focus
+            $('#message').val('').focus();
+        }
+    });
+</script>
+</body>
+</html>
