@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 26px;
+            font-family: Verdana, sans-serif;
+        }
+        div {
+            margin-bottom: 0.3em;
+        }
+        .btn {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <button type="button" class="btn" id="start-worker">Start worker</button>
+</div>
+<ul id="messages"></ul>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('#start-worker').click(function () {
+            // Get promise
+            var promise = beginProcessing();
+
+            // Register event handlers
+            promise.progress(function (message) {
+                // Update the UI for progress
+                $('#messages').append('<li>Progress: ' + message +'</li>');
+            }).done(function (message) {
+                // Update the UI for completion
+                $('#messages').append('<li>Completion: ' + message + '</li>');
+            });
+        });
+    });
+
+    // Worker implementation using Deferred
+
+    // Create deferred object and make sure it's going to be in scope
+    var deferred = new $.Deferred();
+    function beginProcessing() {
+        // Create deferred object and make sure it's going to be in scope
+        var deferred = new $.Deferred();
+
+        // Create our worker
+        var worker = new Worker('js/deferred.js');
+
+        // Register the message event handler
+        worker.addEventListener('message', function (e) {
+            // Simple messaging
+            if (e.data === 'READY') {
+                // No UI
+                // Progress notification
+                deferred.notify('Worker started');
+            } else if (e.data === 'COMPLETED') {
+                // Processing is done
+                deferred.resolve('Worker completed');
+                worker.terminate();
+            }
+        });
+        return deferred.promise();
+    }
+</script>
+</body>
+</html>
