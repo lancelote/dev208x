@@ -18,13 +18,13 @@
             padding: .1em;
         }
 
+        .rating-chosen {
+            background-color: green;
+        }
         .rating-hover {
             background-color: yellow;
         }
 
-        .rating-chosen {
-            background-color: green;
-        }
     </style>
 </head>
 <body>
@@ -32,64 +32,95 @@
 <h2>Finding elements using jQuery</h2>
 <div>This session is about identifying elements using jQuery methods and selectors.</div>
 <h3>Rate this session</h3>
-<div id="rating-container" max-value="5"></div>
+<div id="rating-container" max-value="5">
+</div>
 
 <div>
     <label for="max-value">Enter max value:</label>
     <input type="text" id="max-value" />
     <button type="button" id="update-max-value">Update max value</button>
+    <br/>
+    <button type="button" id="save-rating">Save Rating</button>
 </div>
+<div id="output"></div>
 
-<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.js"></script>
+
 <script>
-    $(function () {
-        var $clicked;  // Clicked circle
-        var $container = $('#rating-container');
+    $(function() {
+        var element_chosen = null;
+        var init_max = $('#rating-container').attr('max-value');
+        var g_max = null;
 
-        updatePageStructure($container.attr('max-value'));  // Setup initial circles
+        create_rating(init_max);
 
-        // Circle adding machine
-        function updatePageStructure (circleNumber) {
-            while(circleNumber--) {
-                $container.append('<div class="rating-circle"></div>');
+        $('#save-rating').click(function(event) {
+            if(g_max == null){
+                var max_value_post = $('#rating-container').attr('max-value');
+            }else{
+                var max_value_post = g_max;
+            }
+
+            if(element_chosen==null){
+                var value_post = 0;
+            }else{
+                var value_post = element_chosen.index();
+                value_post++;
+            }
+
+            var json_object = {
+                'value': value_post,
+                'maxValue': max_value_post
+            };
+
+
+            $.post(
+                    "http://jquery-edx.azurewebsites.net/api/Rating",
+                    json_object,
+                    function(data,status){
+                        $('#output').html(data.message);
+                    });
+
+        });
+
+        $('#update-max-value').click(function(event) {
+            var new_max = $('#max-value').val();
+            create_rating(new_max);
+        });
+
+        $(document).delegate('.rating-circle', 'mouseenter', function() {
+            $(".rating-circle").removeClass('rating-chosen');
+            $(this).addClass('rating-hover');
+            $(this).prevAll().addClass('rating-hover');
+        });
+
+        $(document).delegate('.rating-circle', 'mouseleave', function() {
+            $(".rating-circle").removeClass('rating-hover');
+            if(element_chosen!=null){
+                element_chosen.addClass('rating-chosen');
+                element_chosen.prevAll().addClass('rating-chosen');
+            }
+        });
+
+        $(document).delegate('.rating-circle', 'click', function() {
+            element_chosen = $(this);
+            $(this).addClass('rating-chosen');
+            $(this).prevAll().addClass('rating-chosen');
+        });
+
+        function create_rating(max_rating){
+            $('#rating-container').empty();
+            element_chosen=null;
+            if(Math.floor(max_rating) == max_rating && $.isNumeric(max_rating)){ //is value an integer?
+                g_max = max_rating;
+                for(var i=0; i<g_max; i++){
+                    $('#rating-container').append('<div class="rating-circle"></div>');
+                }
+            }else{
+                g_max=0;
             }
         }
-
-        // Update number of circles according to user input
-        $('#update-max-value').on('click', function () {
-            // Remove all old circles
-            $container.html('');
-
-            // Add new circles
-            updatePageStructure($('#max-value').val());
-        });
-
-        $container.on('mouseenter', '.rating-circle', function () {
-            // Remove old rating
-            if ($clicked) {
-                $clicked.prevAll().andSelf().removeClass('rating-chosen');
-            }
-
-            // Add yellow hover effect
-            $(this).prevAll().andSelf().addClass('rating-hover');
-        });
-
-        $container.on('mouseleave', '.rating-circle', function () {
-            // Remove yellow hover effect
-            $(this).prevAll().andSelf().removeClass('rating-hover');
-
-            // Restore user rating if any
-            if ($clicked) {
-                $clicked.prevAll().andSelf().addClass('rating-chosen');
-            }
-        });
-
-        // Save user rating and color circles to green
-        $container.on('click', '.rating-circle', function () {
-            $clicked = $(this);
-            $(this).prevAll().andSelf().addClass('rating-chosen');
-        });
-    })
+    });
 </script>
 </body>
 </html>
