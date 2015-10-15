@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <button type="button" class="btn" id="execute">Load data</button>
+</div>
+<div id="output"></div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('#execute').click(function () {
+            $.get('/api/Demo/42', function (data) {
+                $('#output').text(data);
+            })
+        });
+    })
+</script>
+</body>
+</html>
