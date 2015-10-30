@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <label for="first-name">First name:</label>
+    <input type="text" class="form-control" id="first-name">
+</div>
+<div>
+    <label for="last-name">Last name:</label>
+    <input type="text" class="form-control" id="last-name">
+</div>
+<div>
+    <button type="button" class="btn" id="execute">Save data</button>
+</div>
+<div id="output">Data will go here</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('#execute').click(function () {
+            var person = {};
+            person.firstName = $('#first-name').val();
+            person.lastName = $('second-name').val();
+
+            $.post('/api/Demo', person).done(function (data) {
+                $('#output').text(data.firstName + ' ' + data.lastName);
+            });
+        });
+
+        $(document).ajaxSend(function () {
+            $('#execute').attr('disabled', 'disabled');
+        }).ajaxComplete(function () {
+            $('#execute').removeAttr('disabled');
+        })
+    })
+</script>
+</body>
+</html>
