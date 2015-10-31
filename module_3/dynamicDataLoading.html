@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <button type="button" class="btn" id="execute">Load Script</button>
+</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('#execute').click(function () {
+            $.getScript('js/dynamic.js');
+        });
+    })
+</script>
+</body>
+</html>
